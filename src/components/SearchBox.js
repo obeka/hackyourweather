@@ -29,7 +29,7 @@ export default function SearchBox({setForecastDatas, forecastDatas, setError}) {
         setLoading(true);
         setError({status: false})
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=d8ec6deb36ba75a65cc1bd04f63a3163`);
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`);
             const forecast = await response.json();
             if(forecast.cod === 200) {
                 setForecastDatas([...forecastDatas, forecast]);
