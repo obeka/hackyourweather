@@ -6,7 +6,7 @@ export default function ForecastList({forecastData}) {
     
     return (
         <div className='container'>
-            {forecastData.map(singleData => <ForecastCard  singleData={singleData}/>)}   
+            {forecastData.map((singleData,index) => <ForecastCard key={index}  singleData={singleData}/>).reverse()} {/* with reverse method, user can see the last entry */} 
         </div>
     )
 }

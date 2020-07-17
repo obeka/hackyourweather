@@ -1,0 +1,26 @@
+.error {
+    max-width: 455px;
+    margin: 10px auto -20px;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    border-radius: 3px;
+}
+
+.danger {
+    color: #721C24;
+    background-color: #F8D7DA;
+}
+
+.alert {
+    color: #A18533;
+    background-color: #FFF3CD;
+}
+
+.icon {
+    margin: 10px;
+}

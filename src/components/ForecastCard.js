@@ -7,9 +7,9 @@ export default function ForecastCard({singleData}) {
 
     return (
         <div className='card-container' key={id}>
-            <h1>{name}, {country}</h1>
+            <h2>{name}, {country}</h2>
             <div className="description">
-                <h2>{main}</h2>
+                <h3>{main}</h3>
                 <p>{description}</p>
             </div>
             
