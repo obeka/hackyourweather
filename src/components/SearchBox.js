@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './SearchBox.css'
+import Alert from './Alert';
+import './SearchBox.css';
 
-export default function SearchBox({setForecastDatas, forecastDatas, setError}) {
+export default function SearchBox({setForecastDatas, forecastDatas}) {
     const [cityName, setCityName] = useState('');
     const [isLoading, setLoading] = useState(false); //loading effect
-    const [countSearch, setCountSearch] = useState(0); //for useEffect
+    const [hasError, setError] = useState({status : false});
 
     const handleCityName = e => setCityName(e.target.value); 
 
@@ -12,18 +13,20 @@ export default function SearchBox({setForecastDatas, forecastDatas, setError}) {
         e.preventDefault();
         const duplicateSearch = forecastDatas.some(singleData => singleData.name.toLowerCase() === cityName.toLowerCase()); // prevent user enter the same city entered before
         if(!duplicateSearch) {
-            setCountSearch(countSearch + 1);
+            getCity(cityName);
         } else {
-                setError({status: true, text: { message :'Duplicate search, please check your terms'}, type: 'duplicate'}); //Client side - Duplicate entry error
+            setError({status: true, text: { message :'Duplicate search, please check your terms'}, type: 'duplicate'}); //Client side - Duplicate entry error
         }
     }
 
     useEffect(() => {
-        if(countSearch !== 0) {
-            getCity(cityName);  
-            setCityName('');
-        }
-    }, [countSearch])
+       
+        const timer = setTimeout(() => {
+            setError({status : false})
+        }, 3000);
+        return () => clearTimeout(timer);
+
+    },[hasError.status] )
 
     const getCity = async (cityName) => {
         setLoading(true);
@@ -50,6 +53,7 @@ export default function SearchBox({setForecastDatas, forecastDatas, setError}) {
                 <input type="text" value={cityName} onChange={handleCityName} placeholder='Enter a city name...'
                     required />
                 <button type='submit'>Get Weather</button>
+                {hasError.status && <Alert hasError={hasError} />}
                 {/* Loading effect from outer source */}
                 <div className="loading">
                     {isLoading && <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>}
