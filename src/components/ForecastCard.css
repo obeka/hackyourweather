@@ -23,6 +23,25 @@ margin-bottom: 8px;
 p:last-child {
 margin-bottom: 15px;
 }
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.delete-icon {
+ font-size: 30px;
+ display: inline-block;
+cursor: pointer;
+ margin-right: 30px;
+ margin-top: 10px;
+ transition: 0.4s;
+}
+
+.delete-icon:hover {
+color: red;
+transform: scale(1.05);
+}
 
 @media screen and (max-width: 992px) {
   .card-container {
